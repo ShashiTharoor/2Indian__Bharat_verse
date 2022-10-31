@@ -4,7 +4,7 @@ import imagehash, re
 import sys
 sys.path.insert(1, '/home/ubuntu/mum/IC')
 import gyfcat
-
+reddit1 = praw.Reddit(user_name='PdfFileOpener',refresh_token='2252389277312-ZCXJtfseArkexvPu2W0O7mfD4RVONw',client_id='U6nHuczXwm8okuLbFcs4Eg',client_secret='REHGpEGObR5C_sA_J-d8KQodKZNb8Q',redirect_uri='http://localhost:8080',user_agent='testscript by wwu/fakebot3',)
 reddit = praw.Reddit(user_name='Living-Field-2070',refresh_token='2315505442146-HPb7mc4GRHcpm6DEwvPNTn7Fn-DJXg',client_id='U6nHuczXwm8okuLbFcs4Eg',client_secret='REHGpEGObR5C_sA_J-d8KQodKZNb8Q',redirect_uri='http://localhost:8080',user_agent='testscript by u/fakebot3',)
 subreddit=reddit.subreddit('Bharat_verse')
 def RandomAccount():
@@ -83,12 +83,16 @@ def main(url, title,item=None):
         submission=Video(url, title)
     else: 
         submission=subreddit.submit(title, url=item.url)
-    print(submission)
+    print(submission.permalink)
+    submission=reddit1.submission(id=submission.id)
+    submission.mod.approve()
+    return submission
 
-url="https://www.reddit.com/r/IndiaSpeaks/comments/yh9xhf/hindi_as_a_mother_tonguehistoric_vs_2022/"
+url="https://www.reddit.com/r/india/comments/yhkfb6/happy_halloween/"
 submission=reddit.submission(url=url)
 print(submission.url)
-main(submission.url, submission.title,item=submission)
+#submission.title
+submission=main(submission.url, submission.title,item=submission)
 
 
 # Image_submission(
